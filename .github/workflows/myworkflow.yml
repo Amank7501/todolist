@@ -6,26 +6,26 @@
         branches: 
           - master
     jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout source 
-            uses: actions/checkout@v3
+      # build:
+      #   runs-on: ubuntu-latest
+      #   steps:
+      #     - name: Checkout source 
+      #       uses: actions/checkout@v3
     
-          - name: Login to DockerHub
-            uses: docker/login-action@v2
-            with:
-              username: ${{ secrets.DOCKERHUB_USERNAME }}
-              password: ${{ secrets.DOCKERHUB_TOKEN }}
-          - name: build and push to DockerHub
-            run: |
-              docker buildx create --use --platform=linux/arm64,linux/amd64 --name multi-platform-builder
-              docker buildx inspect --bootstrap
-              docker buildx build --platform linux/amd64,linux/arm64/v8 --push --tag aman7681/todo:latest .
+      #     - name: Login to DockerHub
+      #       uses: docker/login-action@v2
+      #       with:
+      #         username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #         password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #     - name: build and push to DockerHub
+      #       run: |
+      #         docker buildx create --use --platform=linux/arm64,linux/amd64 --name multi-platform-builder
+      #         docker buildx inspect --bootstrap
+      #         docker buildx build --platform linux/amd64,linux/arm64/v8 --push --tag aman7681/todo:latest .
         
     
       deploy:
-        needs: build
+        # needs: build
         runs-on: [ec2-user]
         steps: 
           - name: Login to DockerHub
@@ -39,5 +39,7 @@
             run: docker rm -f todo-container
           - name: Run docker container
             run: docker run -d -p 80:5000 --name todo-container aman7681/todo
+          - name: Show containers
+            run: docker ps
     
     
