@@ -21,7 +21,7 @@
             run: |
               docker buildx create --use --platform=linux/arm64,linux/amd64 --name multi-platform-builder
               docker buildx inspect --bootstrap
-              docker buildx build --platform linux/amd64,linux/arm64/v8 --push --tag aman7681/backendimage:latest .
+              docker buildx build --platform linux/amd64,linux/arm64/v8 --push --tag aman7681/todo:latest .
         
     
       deploy:
@@ -34,10 +34,10 @@
               username: ${{ secrets.DOCKERHUB_USERNAME }}
               password: ${{ secrets.DOCKERHUB_TOKEN }}
           - name: Pull image from docker hub
-            run: docker pull aman7681/backendimage:latest
+            run: docker pull aman7681/todo:latest
           - name: Delete old container
-            run: docker rm -f crowdcontract-container
+            run: docker rm -f todo-container
           - name: Run docker container
-            run: docker run -d -p 5001:5001 --name crowdcontract-container aman7681/backendimage
+            run: docker run -d -p 5001:5001 --name todo-container aman7681/todo
     
     
