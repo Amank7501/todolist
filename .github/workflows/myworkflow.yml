@@ -4,7 +4,7 @@
     on:
       push:
         branches: 
-          - todoworkflow
+          - master
     jobs:
       build:
         runs-on: ubuntu-latest
