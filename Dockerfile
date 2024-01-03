@@ -18,4 +18,3 @@ COPY . .
 # Starting our application
 CMD ["npm","start]
 
-EXPOSE 3000
