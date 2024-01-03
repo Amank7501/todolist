@@ -38,7 +38,7 @@
           - name: Delete old container
             run: docker rm -f todo-container
           - name: Run docker container
-            run: docker run -d -p 8080:8080 --name todo-container aman7681/todo 
+            run: docker run -d -p 8080:8080 --name todo-container aman7681/todo tail -f /dev/null
           # - name: Run forground process
           #   run: docker run -d aman7681/todo:latest tail -f /dev/null
           - name: Show containers
