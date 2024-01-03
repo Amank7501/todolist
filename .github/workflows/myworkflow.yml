@@ -1,5 +1,5 @@
 ---
-    name: CICD
+    name: CI/CD
     
     on:
       push:
